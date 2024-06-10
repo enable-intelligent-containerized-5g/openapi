@@ -18,8 +18,8 @@ import (
 
 	"github.com/antihax/optional"
 
-	"github.com/free5gc/openapi"
-	. "github.com/free5gc/openapi/models"
+	"github.com/enable-intelligent-and-containerized-5g/openapi"
+	. "github.com/enable-intelligent-and-containerized-5g/openapi/models"
 )
 
 // Linger please
