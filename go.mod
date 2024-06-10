@@ -1,4 +1,4 @@
-module github.com/free5gc/openapi
+module github.com/enable-intelligent-and-containerized-5g/openapi
 
 go 1.14
 
