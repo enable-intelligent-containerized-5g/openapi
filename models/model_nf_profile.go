@@ -43,6 +43,7 @@ type NfProfile struct {
 	PcfInfo                          *PcfInfo                          `json:"pcfInfo,omitempty" yaml:"pcfInfo" bson:"pcfInfo" mapstructure:"PcfInfo"`
 	BsfInfo                          *BsfInfo                          `json:"bsfInfo,omitempty" yaml:"bsfInfo" bson:"bsfInfo" mapstructure:"BsfInfo"`
 	ChfInfo                          *ChfInfo                          `json:"chfInfo,omitempty" yaml:"chfInfo" bson:"chfInfo" mapstructure:"ChfInfo"`
+	NwdafInfo                        *NwdafInfo                        `json:"nwdafInfo,omitempty" yaml:"nwdafInfo" bson:"nwdafInfo" mapstructure:"NwdafInfo"`
 	NrfInfo                          *NrfInfo                          `json:"nrfInfo,omitempty" yaml:"nrfInfo" bson:"nrfInfo" mapstructure:"NrfInfo"`
 	CustomInfo                       map[string]interface{}            `json:"customInfo,omitempty" yaml:"customInfo" bson:"customInfo" mapstructure:"CustomInfo"`
 	RecoveryTime                     *time.Time                        `json:"recoveryTime,omitempty" yaml:"recoveryTime" bson:"recoveryTime" mapstructure:"RecoveryTime"`
