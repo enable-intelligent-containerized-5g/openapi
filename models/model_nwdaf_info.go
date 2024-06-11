@@ -14,5 +14,5 @@ type NwdafInfo struct {
 	// SupiRanges                     []SupiRange     `json:"supiRanges,omitempty" yaml:"supiRanges" bson:"supiRanges" mapstructure:"SupiRanges"`
 	// GpsiRanges                     []IdentityRange `json:"gpsiRanges,omitempty" yaml:"gpsiRanges" bson:"gpsiRanges" mapstructure:"GpsiRanges"`
 	// ExternalGroupIdentifiersRanges []IdentityRange `json:"externalGroupIdentifiersRanges,omitempty" yaml:"externalGroupIdentifiersRanges" bson:"externalGroupIdentifiersRanges" mapstructure:"ExternalGroupIdentifiersRanges"`
-	// SupportedDataSets              []DataSetId     `json:"supportedDataSets,omitempty" yaml:"supportedDataSets" bson:"supportedDataSets" mapstructure:"SupportedDataSets"`
+	SupportedDataSets              []DataSetId     `json:"supportedDataSets,omitempty" yaml:"supportedDataSets" bson:"supportedDataSets" mapstructure:"SupportedDataSets"`
 }
