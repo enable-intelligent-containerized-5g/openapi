@@ -11,7 +11,7 @@ package Nudr_DataRepository
 
 import (
 
-	// "github.com/enable-intelligent-and-containerized-5g/openapi/models"
+	// "github.com/enable-intelligent-containerized-5g/openapi/models"
 	"context"
 	"fmt"
 	"io/ioutil"
@@ -19,7 +19,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/enable-intelligent-and-containerized-5g/openapi"
+	"github.com/enable-intelligent-containerized-5g/openapi"
 )
 
 // Linger please
