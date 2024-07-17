@@ -1,4 +1,4 @@
-module github.com/enable-intelligent-and-containerized-5g/openapi
+module github.com/enable-intelligent-containerized-5g/openapi
 
 go 1.14
 
