@@ -1,0 +1,9 @@
+package models
+
+type NwdafEventsSubscriptionNotificationMethod string
+
+// List of NwdafEventsSubscriptionNotificationMethod
+const (
+	NwdafEventsSubscriptionNotificationMethod_PERIODIC  NwdafEventsSubscriptionNotificationMethod = "PERIODIC"
+	NwdafEventsSubscriptionNotificationMethod_THRESHOLD NwdafEventsSubscriptionNotificationMethod = "THRESHOLD"
+)
