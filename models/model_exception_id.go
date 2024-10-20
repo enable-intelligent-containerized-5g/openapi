@@ -1,0 +1,16 @@
+package models
+
+type ExceptionId string
+
+// List of ExceptionId
+const (
+	ExceptionId_UNEXPECTED_UE_LOCATION         ExceptionId = "UNEXPECTED_UE_LOCATION"
+	ExceptionId_UNEXPECTED_LONG_LIVE_FLOW      ExceptionId = "UNEXPECTED_LONG_LIVE_FLOW"
+	ExceptionId_UNEXPECTED_LARGE_RATE_FLOW     ExceptionId = "UNEXPECTED_LARGE_RATE_FLOW"
+	ExceptionId_UNEXPECTED_WAKEUP              ExceptionId = "UNEXPECTED_WAKEUP"
+	ExceptionId_SUSPICION_OF_DDOS_ATTACK       ExceptionId = "SUSPICION_OF_DDOS_ATTACK"
+	ExceptionId_WRONG_DESTINATION_ADDRESS      ExceptionId = "WRONG_DESTINATION_ADDRESS"
+	ExceptionId_TOO_FREQUENT_SERVICE_ACCESS    ExceptionId = "TOO_FREQUENT_SERVICE_ACCESS"
+	ExceptionId_UNEXPECTED_RADIO_LINK_FAILURES ExceptionId = "UNEXPECTED_RADIO_LINK_FAILURES"
+	ExceptionId_PING_PONG_ACROSS_CELLS         ExceptionId = "PING_PONG_ACROSS_CELLS"
+)
