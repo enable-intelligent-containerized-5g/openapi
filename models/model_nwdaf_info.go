@@ -9,10 +9,16 @@
 
 package models
 
+// Information of a NWDAF NF Instance
 type NwdafInfo struct {
-	// GroupId                        string          `json:"groupId,omitempty" yaml:"groupId" bson:"groupId" mapstructure:"GroupId"`
-	// SupiRanges                     []SupiRange     `json:"supiRanges,omitempty" yaml:"supiRanges" bson:"supiRanges" mapstructure:"SupiRanges"`
-	// GpsiRanges                     []IdentityRange `json:"gpsiRanges,omitempty" yaml:"gpsiRanges" bson:"gpsiRanges" mapstructure:"GpsiRanges"`
-	// ExternalGroupIdentifiersRanges []IdentityRange `json:"externalGroupIdentifiersRanges,omitempty" yaml:"externalGroupIdentifiersRanges" bson:"externalGroupIdentifiersRanges" mapstructure:"ExternalGroupIdentifiersRanges"`
-	SupportedDataSets              []DataSetId     `json:"supportedDataSets,omitempty" yaml:"supportedDataSets" bson:"supportedDataSets" mapstructure:"SupportedDataSets"`
+	EventIds        []EventId        `json:"eventIds,omitempty" yaml:"eventIds" bson:"eventIds,omitempty"`
+	NwdafEvents     []NwdafEvent     `json:"nwdafEvents,omitempty" yaml:"nwdafEvents" bson:"nwdafEvents,omitempty"`
+	TaiList         []Tai            `json:"taiList,omitempty" yaml:"taiList" bson:"taiList,omitempty"`
+	TaiRangeList    []TaiRange       `json:"taiRangeList,omitempty" yaml:"taiRangeList" bson:"taiRangeList,omitempty"`
+	NwdafCapability *NwdafCapability `json:"nwdafCapability,omitempty" yaml:"nwdafCapability" bson:"nwdafCapability,omitempty"`
+	// indicating a time in seconds.
+	AnalyticsDelay     int32                   `json:"analyticsDelay,omitempty" yaml:"analyticsDelay" bson:"analyticsDelay,omitempty"`
+	ServingNfSetIdList []string                `json:"servingNfSetIdList,omitempty" yaml:"servingNfSetIdList" bson:"servingNfSetIdList,omitempty"`
+	ServingNfTypeList  []NrfNfManagementNfType `json:"servingNfTypeList,omitempty" yaml:"servingNfTypeList" bson:"servingNfTypeList,omitempty"`
+	MlAnalyticsList    []MlAnalyticsInfo       `json:"mlAnalyticsList,omitempty" yaml:"mlAnalyticsList" bson:"mlAnalyticsList,omitempty"`
 }
