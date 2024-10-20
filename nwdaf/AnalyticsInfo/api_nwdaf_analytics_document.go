@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/url"
 	"strings"
+	"strconv"
 
 	"github.com/enable-intelligent-containerized-5g/openapi"
 	"github.com/enable-intelligent-containerized-5g/openapi/models"
@@ -136,7 +137,7 @@ func (a *NWDAFAnalyticsDocumentApiService) GetNWDAFAnalytics(ctx context.Context
 
 	apiError := openapi.GenericOpenAPIError{
 		RawBody:     localVarBody,
-		ErrorStatus: localVarHTTPResponse.StatusCode,
+		ErrorStatus: strconv.Itoa(localVarHTTPResponse.StatusCode),
 	}
 
 	switch localVarHTTPResponse.StatusCode {
