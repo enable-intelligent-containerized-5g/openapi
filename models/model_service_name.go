@@ -49,4 +49,5 @@ const (
 	ServiceName_NNWDAF_ANALYTICSINFO      ServiceName = "nnwdaf-analyticsinfo"
 	ServiceName_NNWDAF_DATAMANAGEMENT     ServiceName = "nnwdaf-datamanagement"
 	ServiceName_NNWDAF_MLMODELPROVISION   ServiceName = "nnwdaf-mlmodelprovision"
+	ServiceName_NNWDAF_MLMODELINFO        ServiceName = "nnwdaf-mlmodelinfo"
 )
