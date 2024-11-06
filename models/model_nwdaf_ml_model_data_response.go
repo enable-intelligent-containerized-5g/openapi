@@ -1,5 +1,5 @@
 package models
 
 type MlModelDataResponse struct {
-	MlModelDataResp []MlModelData `json:"mlModelDataResp,omitempty" yaml:"mlModelDataResp" bson:"mlModelDataResp" mapstructure:"mlModelDataResp"`
+	MlModels      []MlModelData              `json:"mlModels,omitempty" yaml:"mlModels" bson:"mlModels" mapstructure:"mlModels"`
 }
