@@ -1,4 +1,4 @@
-package Nnwaf_NFDiscovery
+package Nnwaf_MLModelInfo
 
 import (
 	"net/http"
@@ -16,8 +16,8 @@ type Configuration struct {
 
 func NewConfiguration() *Configuration {
 	cfg := &Configuration{
-		basePath:      "https://example.com/nnrf-disc/v1",
-		url:           "{apiRoot}/nnrf-disc/v1",
+		basePath:      "https://example.com/nnwdaf-mlmodelinfo/v1",
+		url:           "{apiRoot}/nnwdaf-mlmodelinfo/v1",
 		defaultHeader: make(map[string]string),
 		userAgent:     "Intelligent-Containerized-5G/1.0.0/go",
 	}
