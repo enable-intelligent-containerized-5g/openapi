@@ -10,3 +10,10 @@ type NwdafAnalyticsInfoRequest struct {
 	NfInstanceIds []string             `json:"nfInstanceIds,omitempty" yaml:"nfInstanceIds" bson:"nfInstanceIds,omitempty"`
 	NfTypes       []NfType             `json:"nfTypes,omitempty" yaml:"nfTypes" bson:"nfTypes,omitempty"`
 }
+
+// Constructor for asigning default values to struct
+func NewNwdafAnalyticsInfoRequest() NwdafAnalyticsInfoRequest {
+	return NwdafAnalyticsInfoRequest{
+		Accuracy: NwdafMlModelAccuracy_LOW,
+	}
+}
