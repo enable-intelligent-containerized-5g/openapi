@@ -12,8 +12,8 @@ type NwdafAnalyticsInfoRequest struct {
 }
 
 // Constructor for asigning default values to struct
-func NewNwdafAnalyticsInfoRequest() NwdafAnalyticsInfoRequest {
-	return NwdafAnalyticsInfoRequest{
-		Accuracy: NwdafMlModelAccuracy_LOW,
-	}
-}
+// func NewNwdafAnalyticsInfoRequest() NwdafAnalyticsInfoRequest {
+// 	return NwdafAnalyticsInfoRequest{
+// 		Accuracy: NwdafMlModelAccuracy_LOW,
+// 	}
+// }

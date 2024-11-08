@@ -5,6 +5,7 @@ type MlModelDataTable struct {
 	URI          string
 	Size         int64
 	TargetPeriod int64
+	Confidence   float64
 	NfTypeID     int64         `gorm:"foreignKey:ID"`
 	AccuracyID   int64         `gorm:"foreignKey:ID"`
 	EventID      int64         `gorm:"foreignKey:ID"`
