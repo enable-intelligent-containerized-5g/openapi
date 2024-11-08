@@ -3,7 +3,8 @@ package models
 type NwdaAnalyticsInfoNfLoad struct {
 	Accuracy     NwdafMlModelAccuracy `json:"accuracy,omitempty" yaml:"accuracy,omitempty" bson:"accuracy,omitempty" `
 	NfInstanceId string               `json:"nfInstanceId,omitempty" yaml:"nfInstanceId,omitempty" bson:"nfInstanceId,omitempty" `
-	NfType       NfType               `json:"nfType,omitempty" yaml:"nfType,omitempty" bson:"nfType,omitempty" `
+	NfType       NfType               `json:"nfType,omitempty" yaml:"nfType,omitempty" bson:"nfType,omitempty"`
+	Pod          string               `json:"pod,omitempty" yaml:"pod,omitempty" bson:"pod,omitempty" `
 	CpuUsage     float64              `json:"cpu_usage,omitempty" yaml:"cpu_usage,omitempty" bson:"cpu_usage,omitempty" `
 	MemUsage     float64              `json:"mem_usage,omitempty" yaml:"mem_usage,omitempty" bson:"mem_usage,omitempty" `
 	CpuLimit     float64              `json:"cpu_limit,omitempty" yaml:"cpu_limit,omitempty" bson:"cpu_limit,omitempty" `
