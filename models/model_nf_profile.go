@@ -14,6 +14,7 @@ import (
 )
 
 type NfProfile struct {
+  ContainerName                    string                                  `json:"containerName,omitempty" yaml:"containerName" bson:"containerName" mapstructure:"ContainerName"`
 	NfInstanceId                     string                                  `json:"nfInstanceId" yaml:"nfInstanceId" bson:"nfInstanceId" mapstructure:"NfInstanceId"`
 	NfType                           NfType                                  `json:"nfType" yaml:"nfType" bson:"nfType" mapstructure:"NfType"`
 	NfStatus                         NfStatus                                `json:"nfStatus" yaml:"nfStatus" bson:"nfStatus" mapstructure:"NfStatus"`
