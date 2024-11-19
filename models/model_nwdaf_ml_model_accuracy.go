@@ -17,3 +17,13 @@ func NewNwdafMlModelAccuracyPriority() []NwdafMlModelAccuracy {
 		NwdafMlModelAccuracy_HIGH,
 	}
 }
+
+func SetAcuracy(r2 float64) NwdafMlModelAccuracy {
+	if r2 > float64(NwdafMlModelAccuracyRange_HIGH) {
+		return NwdafMlModelAccuracy_HIGH
+	} else if r2 > float64(NwdafMlModelAccuracyRange_MEDIUM) {
+		return NwdafMlModelAccuracy_MEDIUM
+	} else {
+		return NwdafMlModelAccuracy_LOW
+	}
+}
