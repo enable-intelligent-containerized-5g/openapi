@@ -1,6 +1,6 @@
 package models
 
 type NFTypeTable struct {
-	ID     int64 `gorm:"primaryKey"`
-	NfType NfType
+	ID     int64  `gorm:"primaryKey" json:"id"`
+	NfType NfType `json:"nfType"`
 }
