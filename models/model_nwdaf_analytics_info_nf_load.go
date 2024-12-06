@@ -10,6 +10,7 @@ type NwdafAnalyticsInfoNfLoad struct {
 	MemUsage     float64               `json:"memUsage" yaml:"memUsage" bson:"memUsage"`
 	CpuLimit     float64               `json:"cpuLimit" yaml:"cpuLimit" bson:"cpuLimit"`
 	MemLimit     float64               `json:"memLimit" yaml:"memLimit" bson:"memLimit"`
+	Throughput   float64               `json:"throughput" yaml:"throughput" bson:"throughput"`
 	NfLoad       ResourcesNfLoad       `json:"nfLoad" yaml:"nfLoad" bson:"nfLoad"`
 	NfStatus     NfStatus              `json:"nfStatus,omitempty" yaml:"nfStatus,omitempty" bson:"nfStatus,omitempty"`
 	Confidence   MlModelDataConfidence `json:"confidence,omitempty" yaml:"confidence,omitempty" bson:"confidence,omitempty"`
