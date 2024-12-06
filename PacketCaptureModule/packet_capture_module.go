@@ -9,10 +9,11 @@ import (
 
 	"context"
 
-	"github.com/enable-intelligent-containerized-5g/openapi/models"
+	pcm_models "github.com/enable-intelligent-containerized-5g/openapi/PacketCaptureModule/models"
 	// "github.com/free5gc/nwdaf/internal/logger"
 	// "github.com/free5gc/nwdaf/pkg/factory"
 
+	// "github.com/enable-intelligent-containerized-5g/openapi/models"
 	"github.com/prometheus/client_golang/api" // go get github.com/prometheus/client_golang/api
 	v1 "github.com/prometheus/client_golang/api/prometheus/v1"
 	"github.com/prometheus/common/model"
@@ -35,7 +36,7 @@ func CreateClient(pcmUri string) (apiClient v1.API, err error) {
 	return apiClient, err
 }
 
-func ExecutePrometheusQuery(query string, metric models.MetricType, timeReq time.Time, pcmUri string) (metrics []models.PrometheusResult, err error) {
+func ExecutePrometheusQuery(query string, metric pcm_models.MetricType, timeReq time.Time, pcmUri string) (metrics []pcm_models.PrometheusResult, err error) {
 	// Get PcmUri
 	// logger.PcmLog.Infof("Getting %s value from Prometheus", metric)
 	apiClient, err := CreateClient(pcmUri)
@@ -57,7 +58,7 @@ func ExecutePrometheusQuery(query string, metric models.MetricType, timeReq time
 	metrics, errProcessing := ProcessPrometheusMetricResult(result, metric)
 
 	if errProcessing != nil || metrics == nil {
-		var value models.PrometheusResult
+		var value pcm_models.PrometheusResult
 		metrics = append(metrics, value)
 		
 		return metrics, errProcessing
@@ -70,7 +71,7 @@ func ExecutePrometheusQuery(query string, metric models.MetricType, timeReq time
 	return metrics, nil
 }
 
-func ExecutePrometheusQueryRange(query string, metric models.MetricType, startTime time.Time, endTime time.Time, step time.Duration, pcmUri string) (metrics []models.PrometheusResult, err error) {
+func ExecutePrometheusQueryRange(query string, metric pcm_models.MetricType, startTime time.Time, endTime time.Time, step time.Duration, pcmUri string) (metrics []pcm_models.PrometheusResult, err error) {
 	// Get PcmUri
 	// logger.PcmLog.Infof("Getting %s range from Prometheus", metric)
 	apiClient, err := CreateClient(pcmUri)
@@ -95,7 +96,7 @@ func ExecutePrometheusQueryRange(query string, metric models.MetricType, startTi
 	metrics, errProcessing := ProcessPrometheusMetricResult(result, metric)
 
 	if errProcessing != nil || metrics == nil {
-		var value models.PrometheusResult
+		var value pcm_models.PrometheusResult
 		metrics = append(metrics, value)
 
 		return metrics, errProcessing
@@ -104,21 +105,21 @@ func ExecutePrometheusQueryRange(query string, metric models.MetricType, startTi
 	return metrics, nil
 }
 
-func GetPodsByPhase(instance string, ns string, phase models.KubernetesPhase, timeReq time.Time, pcmUri string) ([]models.PrometheusResult, error) {
-	var params = models.PrometheusQueryParams{
+func GetPodsByPhase(instance string, ns string, phase pcm_models.KubernetesPhase, timeReq time.Time, pcmUri string) ([]pcm_models.PrometheusResult, error) {
+	var params = pcm_models.PrometheusQueryParams{
 		Instance:  instance,
 		Namespace: ns,
 		Phase:     string(phase),
 	}
 
-	query := models.BuildPodsByStatusQuery(&params)
-	metric := models.MetricType_POD_STATUS
+	query := pcm_models.BuildPodsByStatusQuery(&params)
+	metric := pcm_models.MetricType_POD_STATUS
 
 	return ExecutePrometheusQuery(query, metric, timeReq, pcmUri)
 }
 
-func GetCpuUsageAverage(ns string, pod string, ctnr string, tp int64, offSet int64, timeReq time.Time, pcmUri string) ([]models.PrometheusResult, error) {
-	var params = models.PrometheusQueryParams{
+func GetCpuUsageAverage(ns string, pod string, ctnr string, tp int64, offSet int64, timeReq time.Time, pcmUri string) ([]pcm_models.PrometheusResult, error) {
+	var params = pcm_models.PrometheusQueryParams{
 		Namespace:    ns,
 		Pod:          pod,
 		Container:    ctnr,
@@ -126,14 +127,14 @@ func GetCpuUsageAverage(ns string, pod string, ctnr string, tp int64, offSet int
 		// Offset:       BuiildTargetPeriod(offSet),
 	}
 
-	query := models.BuildCpuUsageAverageQuery(&params)
-	metric := models.MetricType_CPU_USAGE_AVERAGE
+	query := pcm_models.BuildCpuUsageAverageQuery(&params)
+	metric := pcm_models.MetricType_CPU_USAGE_AVERAGE
 
 	return ExecutePrometheusQuery(query, metric, timeReq, pcmUri)
 }
 
-func GetCpuUsageAverageRange(ns string, pod string, ctnr string, tp int64, offSet int64, startTime time.Time, endTime time.Time, pcmUri string) ([]models.PrometheusResult, error) {
-	var params = models.PrometheusQueryParams{
+func GetCpuUsageAverageRange(ns string, pod string, ctnr string, tp int64, offSet int64, startTime time.Time, endTime time.Time, pcmUri string) ([]pcm_models.PrometheusResult, error) {
+	var params = pcm_models.PrometheusQueryParams{
 		Namespace:    ns,
 		Pod:          pod,
 		Container:    ctnr,
@@ -141,14 +142,14 @@ func GetCpuUsageAverageRange(ns string, pod string, ctnr string, tp int64, offSe
 		// Offset:       BuiildTargetPeriod(offSet),
 	}
 
-	query := models.BuildCpuUsageAverageQuery(&params)
-	metric := models.MetricType_CPU_USAGE_AVERAGE
+	query := pcm_models.BuildCpuUsageAverageQuery(&params)
+	metric := pcm_models.MetricType_CPU_USAGE_AVERAGE
 
 	return ExecutePrometheusQueryRange(query, metric, startTime, endTime, time.Duration(tp), pcmUri)
 }
 
-func GetMemUsageAverageRange(ns string, pod string, ctnr string, tp int64, offSet int64, startTime time.Time, endTime time.Time, pcmUri string) ([]models.PrometheusResult, error) {
-	var params = models.PrometheusQueryParams{
+func GetMemUsageAverageRange(ns string, pod string, ctnr string, tp int64, offSet int64, startTime time.Time, endTime time.Time, pcmUri string) ([]pcm_models.PrometheusResult, error) {
+	var params = pcm_models.PrometheusQueryParams{
 		Namespace:    ns,
 		Pod:          pod,
 		Container:    ctnr,
@@ -156,14 +157,14 @@ func GetMemUsageAverageRange(ns string, pod string, ctnr string, tp int64, offSe
 		// Offset:       BuiildTargetPeriod(offSet),
 	}
 
-	query := models.BuildMemUsageAverageQuery(&params)
-	metric := models.MetricType_MEMORY_USAGE_AVERAGE
+	query := pcm_models.BuildMemUsageAverageQuery(&params)
+	metric := pcm_models.MetricType_MEMORY_USAGE_AVERAGE
 
 	return ExecutePrometheusQueryRange(query, metric, startTime, endTime, time.Duration(tp), pcmUri)
 }
 
-func GetMemUsageAverage(ns string, pod string, ctnr string, tp int64, offSet int64, timeReq time.Time, pcmUri string) ([]models.PrometheusResult, error) {
-	var params = models.PrometheusQueryParams{
+func GetMemUsageAverage(ns string, pod string, ctnr string, tp int64, offSet int64, timeReq time.Time, pcmUri string) ([]pcm_models.PrometheusResult, error) {
+	var params = pcm_models.PrometheusQueryParams{
 		Namespace:    ns,
 		Pod:          pod,
 		Container:    ctnr,
@@ -171,65 +172,65 @@ func GetMemUsageAverage(ns string, pod string, ctnr string, tp int64, offSet int
 		// Offset:       BuiildTargetPeriod(offSet),
 	}
 
-	query := models.BuildMemUsageAverageQuery(&params)
-	metric := models.MetricType_MEMORY_USAGE_AVERAGE
+	query := pcm_models.BuildMemUsageAverageQuery(&params)
+	metric := pcm_models.MetricType_MEMORY_USAGE_AVERAGE
 
 	return ExecutePrometheusQuery(query, metric, timeReq, pcmUri)
 }
 
-func GetResourceLimit(ns string, pod string, ctnr string, unit models.PrometheusUnit, timeReq time.Time, pcmUri string) ([]models.PrometheusResult, error) {
-	var params = models.PrometheusQueryParams{
+func GetResourceLimit(ns string, pod string, ctnr string, unit pcm_models.PrometheusUnit, timeReq time.Time, pcmUri string) ([]pcm_models.PrometheusResult, error) {
+	var params = pcm_models.PrometheusQueryParams{
 		Namespace: ns,
 		Pod:       pod,
 		Container: ctnr,
 		Unit:      string(unit),
 	}
 
-	query := models.BuildResourceLimitQuery(&params)
-	var metric models.MetricType
-	if unit == models.PrometheusUnit_CORE {
-		metric = models.MetricType_CPU_LIMIT
+	query := pcm_models.BuildResourceLimitQuery(&params)
+	var metric pcm_models.MetricType
+	if unit == pcm_models.PrometheusUnit_CORE {
+		metric = pcm_models.MetricType_CPU_LIMIT
 	} else {
-		metric = models.MetricType_MEMORY_LIMIT
+		metric = pcm_models.MetricType_MEMORY_LIMIT
 	}
 
 	return ExecutePrometheusQuery(query, metric, timeReq, pcmUri)
 }
 
-func GetResourceRequest(ns string, pod string, ctnr string, unit models.PrometheusUnit, timeReq time.Time, pcmUri string) ([]models.PrometheusResult, error) {
-	var params = models.PrometheusQueryParams{
+func GetResourceRequest(ns string, pod string, ctnr string, unit pcm_models.PrometheusUnit, timeReq time.Time, pcmUri string) ([]pcm_models.PrometheusResult, error) {
+	var params = pcm_models.PrometheusQueryParams{
 		Namespace: ns,
 		Pod:       pod,
 		Container: ctnr,
 		Unit:      string(unit),
 	}
 
-	query := models.BuildResourceRequestQuery(&params)
-	var metric models.MetricType
-	if unit == models.PrometheusUnit_CORE {
-		metric = models.MetricType_CPU_REQUEST
+	query := pcm_models.BuildResourceRequestQuery(&params)
+	var metric pcm_models.MetricType
+	if unit == pcm_models.PrometheusUnit_CORE {
+		metric = pcm_models.MetricType_CPU_REQUEST
 	} else {
-		metric = models.MetricType_MEMORY_REQUEST
+		metric = pcm_models.MetricType_MEMORY_REQUEST
 	}
 
 	return ExecutePrometheusQuery(query, metric, timeReq, pcmUri)
 }
 
-func GetRunningPods(instance string, ns string, ctnr string, timeReq time.Time, pcmUri string) ([]models.PrometheusResult, error) {
-	var params = models.PrometheusQueryParams{
+func GetRunningPods(instance string, ns string, ctnr string, timeReq time.Time, pcmUri string) ([]pcm_models.PrometheusResult, error) {
+	var params = pcm_models.PrometheusQueryParams{
 		Instance:  instance,
 		Namespace: ns,
 		Container: ctnr,
 	}
 
-	query := models.BuildRunningPodsQuery(&params)
-	metric := models.MetricType_RUNNING_POD
+	query := pcm_models.BuildRunningPodsQuery(&params)
+	metric := pcm_models.MetricType_RUNNING_POD
 
 	return ExecutePrometheusQuery(query, metric, timeReq, pcmUri)
 }
 
-func ProcessPrometheusMetricResult(result model.Value, metric models.MetricType) ([]models.PrometheusResult, error) {
-	var output []models.PrometheusResult
+func ProcessPrometheusMetricResult(result model.Value, metric pcm_models.MetricType) ([]pcm_models.PrometheusResult, error) {
+	var output []pcm_models.PrometheusResult
 	var err error
 
 	switch v := result.(type) {
@@ -252,7 +253,7 @@ func ProcessPrometheusMetricResult(result model.Value, metric models.MetricType)
 			uid := string(metricMap["uid"])
 
 			// Crear una instancia de la estructura con los datos extraídos
-			prometheusData := models.PrometheusResult{
+			prometheusData := pcm_models.PrometheusResult{
 				Timestamp:  float64(sample.Timestamp),
 				Value:      float64(sample.Value),
 				MetricType: metric,
@@ -297,7 +298,7 @@ func ProcessPrometheusMetricResult(result model.Value, metric models.MetricType)
 				// uid := string(metricMap["uid"])
 
 				// Crear una instancia de la estructura con los datos extraídos
-				prometheusData := models.PrometheusResult{
+				prometheusData := pcm_models.PrometheusResult{
 					Timestamp:  float64(sample.Timestamp),
 					Value:      float64(sample.Value),
 					MetricType: metric,

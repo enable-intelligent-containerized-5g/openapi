@@ -1,4 +1,4 @@
-package models
+package util
 
 import (
 	"encoding/json"
@@ -6,10 +6,11 @@ import (
 	"os"
 	"strings"
 	"time"
+	pcm_models "github.com/enable-intelligent-containerized-5g/openapi/PacketCaptureModule/models"
 )
 
 // Divide a value in a PrometheusResult other float64
-func DivideValues(results *[]PrometheusResult, divisor float64) {
+func DivideValues(results *[]pcm_models.PrometheusResult, divisor float64) {
 	if math.IsNaN(divisor) || divisor == 0 {
 		divisor = 1
 	}

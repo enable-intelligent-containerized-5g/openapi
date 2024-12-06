@@ -16,6 +16,18 @@ type PrometheusQueryParams struct {
 	Phase        string `json:"phase"`
 }
 
+// UploadThrough ()
+func BuildUploadThroughputQuery(p *PrometheusQueryParams) string {
+	return fmt.Sprintf(`sum(rate(container_network_transmit_bytes_total{namespace="%s", pod="%s", container!~".*wait-.*"}[%s])) by (pod, namespace)`,
+		p.Namespace, p.Pod, p.TargetPeriod)
+}
+
+// DownloadThrough
+func BuildDownloadThroughputQuery(p *PrometheusQueryParams) string {
+	return fmt.Sprintf(`sum(rate(container_network_receive_bytes_total{namespace="%s", pod="%s", container!~".*wait-.*"}[%s])) by (pod, namespace)`,
+		p.Namespace, p.Pod, p.TargetPeriod)
+}
+
 // Memory rate (OK)
 func BuildMemRateQuery(p *PrometheusQueryParams) string {
 	return fmt.Sprintf(`sum(rate(container_memory_usage_bytes{namespace="%s", pod="%s", container="%s", container!~".*wait-.*"}[%s] offset %s)) by (pod, container, namespace)`,
