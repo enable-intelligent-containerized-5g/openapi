@@ -2,10 +2,12 @@ package util
 
 import (
 	"encoding/json"
+	"fmt"
 	"math"
 	"os"
 	"strings"
 	"time"
+
 	pcm_models "github.com/enable-intelligent-containerized-5g/openapi/PacketCaptureModule/models"
 )
 
@@ -29,7 +31,7 @@ func SaveToJson(filename string, data interface{}) error {
 	defer file.Close()
 
 	// Convert the data
-	indentedData, err := json.MarshalIndent(data, "", "    ") 
+	indentedData, err := json.MarshalIndent(data, "", "    ")
 	if err != nil {
 		return err
 	}
@@ -38,7 +40,6 @@ func SaveToJson(filename string, data interface{}) error {
 	_, err = file.Write(indentedData)
 	return err
 }
-
 
 // Load CSV files
 func LoadCsvFiles(dirPath string) (files []string, err error) {
@@ -88,4 +89,18 @@ type CsvData struct {
 	CpuUsage3  float64
 	Timestamp4 int64
 	CpuUsage4  float64
+}
+
+func SumThrougput(a float64, b float64) (total float64, err error) {
+	if !math.IsNaN(a) && !math.IsNaN(b) {
+		total = (a + b) * 8
+	} else {
+		err = fmt.Errorf("DownThrougput or UpThrougpu is invalid")
+	}
+	return total, err
+}
+
+type PairNum struct {
+	Start int64
+	End   int64
 }

@@ -60,7 +60,7 @@ func ExecutePrometheusQuery(query string, metric pcm_models.MetricType, timeReq 
 	if errProcessing != nil || metrics == nil {
 		var value pcm_models.PrometheusResult
 		metrics = append(metrics, value)
-		
+
 		return metrics, errProcessing
 	}
 
@@ -163,6 +163,30 @@ func GetMemUsageAverageRange(ns string, pod string, ctnr string, tp int64, offSe
 	return ExecutePrometheusQueryRange(query, metric, startTime, endTime, time.Duration(tp), pcmUri)
 }
 
+func GetThroughputAverageRange(ns string, pod string, tp int64, offSet int64, metric pcm_models.MetricType, startTime time.Time, endTime time.Time, pcmUri string) ([]pcm_models.PrometheusResult, error) {
+	var params = pcm_models.PrometheusQueryParams{
+		Namespace:    ns,
+		Pod:          pod,
+		TargetPeriod: BuiildTargetPeriod(tp),
+		// Offset:       BuiildTargetPeriod(offSet),
+	}
+
+	var query string
+	if metric == pcm_models.MetricType_DOWNLOAD_THROUGPUT_AVERAGE {
+		query = pcm_models.BuildDownloadThroughputQuery(&params)
+	} else if metric == pcm_models.MetricType_UPLOAD_THROUGPUT_AVERAGE {
+		query = pcm_models.BuildUploadThroughputQuery(&params)
+	} else if metric == pcm_models.MetricType_TOTAL_THROUGPUT_AVERAGE {
+		query = pcm_models.BuildTotalThroughputQuery(&params)
+	} else {
+		err := fmt.Errorf(" Metric type %s isn't implemented", metric)
+		var result []pcm_models.PrometheusResult
+		return result, err
+	}
+
+	return ExecutePrometheusQueryRange(query, metric, startTime, endTime, time.Duration(tp), pcmUri)
+}
+
 func GetMemUsageAverage(ns string, pod string, ctnr string, tp int64, offSet int64, timeReq time.Time, pcmUri string) ([]pcm_models.PrometheusResult, error) {
 	var params = pcm_models.PrometheusQueryParams{
 		Namespace:    ns,
@@ -225,6 +249,29 @@ func GetRunningPods(instance string, ns string, ctnr string, timeReq time.Time, 
 
 	query := pcm_models.BuildRunningPodsQuery(&params)
 	metric := pcm_models.MetricType_RUNNING_POD
+
+	return ExecutePrometheusQuery(query, metric, timeReq, pcmUri)
+}
+
+func GetThroughputAverage(ns string, pod string, tp int64, metric pcm_models.MetricType, timeReq time.Time, pcmUri string) ([]pcm_models.PrometheusResult, error) {
+	var params = pcm_models.PrometheusQueryParams{
+		Namespace:    ns,
+		Pod:          pod,
+		TargetPeriod: BuiildTargetPeriod(tp),
+	}
+
+	var query string
+	if metric == pcm_models.MetricType_DOWNLOAD_THROUGPUT_AVERAGE {
+		query = pcm_models.BuildDownloadThroughputQuery(&params)
+	} else if metric == pcm_models.MetricType_UPLOAD_THROUGPUT_AVERAGE {
+		query = pcm_models.BuildUploadThroughputQuery(&params)
+	} else if metric == pcm_models.MetricType_TOTAL_THROUGPUT_AVERAGE {
+		query = pcm_models.BuildTotalThroughputQuery(&params)
+	} else {
+		err := fmt.Errorf(" Metric type %s isn't implemented", metric)
+		var result []pcm_models.PrometheusResult
+		return result, err
+	}
 
 	return ExecutePrometheusQuery(query, metric, timeReq, pcmUri)
 }
@@ -343,3 +390,4 @@ func BuiildTargetPeriod(num int64) string {
 	result := strconv.FormatFloat(rounded, 'f', -1, 64) + "m"
 	return result
 }
+
