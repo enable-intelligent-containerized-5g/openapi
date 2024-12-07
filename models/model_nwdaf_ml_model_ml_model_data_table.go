@@ -11,8 +11,10 @@ type MlModelDataTable struct {
 	MSE          float64       `json:"mse"`
 	R2Cpu        float64       `json:"r2Cpu"`
 	R2Mem        float64       `json:"r2Mem"`
+	R2Thrpt      float64       `json:"r2Thrpt"`
 	MSECpu       float64       `json:"mseCpu"`
 	MSEMem       float64       `json:"mseMem"`
+	MSEThrpt     float64       `json:"mseThrpt"`
 	NfTypeID     int64         `gorm:"foreignKey:ID" json:"nfTypeId"`
 	AccuracyID   int64         `gorm:"foreignKey:ID" json:"accuracyId"`
 	EventID      int64         `gorm:"foreignKey:ID" json:"eventId"`

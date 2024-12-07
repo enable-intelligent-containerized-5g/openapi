@@ -23,3 +23,9 @@ func NewPrometheusResult() PrometheusResult {
 		Uid:        "",
 	}
 }
+
+func UpdateContainerNameInPrometheusResultList(models *[]PrometheusResult, value string) {
+	for i := range *models {
+		(*models)[i].Container = value
+	}
+}

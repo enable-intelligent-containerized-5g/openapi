@@ -17,6 +17,16 @@ type PrometheusQueryParams struct {
 }
 
 // UploadThrough ()
+func BuildTotalThroughputQuery(p *PrometheusQueryParams) string {
+	query1 := fmt.Sprintf(`sum(rate(container_network_transmit_bytes_total{namespace="%s", pod="%s", container!~".*wait-.*"}[%s])) by (pod, namespace)`,
+		p.Namespace, p.Pod, p.TargetPeriod)
+	query2 := fmt.Sprintf(`sum(rate(container_network_receive_bytes_total{namespace="%s", pod="%s", container!~".*wait-.*"}[%s])) by (pod, namespace)`,
+		p.Namespace, p.Pod, p.TargetPeriod)
+
+	return fmt.Sprintf(`%s + %s`, query1, query2)
+}
+
+// UploadThrough ()
 func BuildUploadThroughputQuery(p *PrometheusQueryParams) string {
 	return fmt.Sprintf(`sum(rate(container_network_transmit_bytes_total{namespace="%s", pod="%s", container!~".*wait-.*"}[%s])) by (pod, namespace)`,
 		p.Namespace, p.Pod, p.TargetPeriod)

@@ -11,4 +11,6 @@ type MlModelTrainingModelInfo struct {
 	R2CPU     float64 `json:"r2Cpu"`
 	MSEMem    float64 `json:"mseMem"`
 	R2Mem     float64 `json:"r2Mem"`
+	MSEThrpt  float64 `json:"mseThrpt"`
+	R2Thrpt   float64 `json:"r2Thrpt"`
 }
