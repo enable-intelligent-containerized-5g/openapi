@@ -1,4 +1,4 @@
-package models
+package pcm_models
 
 type PrometheusResult struct {
 	Timestamp  float64    `json:"timestamp"`

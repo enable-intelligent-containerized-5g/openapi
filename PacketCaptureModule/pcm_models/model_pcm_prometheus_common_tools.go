@@ -1,4 +1,4 @@
-package models
+package pcm_models
 
 func FindPodByContainer(pods []PrometheusResult, container string) *PrometheusResult {
 	for _, pod := range pods {

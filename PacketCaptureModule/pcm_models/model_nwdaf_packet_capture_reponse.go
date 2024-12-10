@@ -1,4 +1,4 @@
-package models
+package pcm_models
 
 import "github.com/enable-intelligent-containerized-5g/openapi/models"
 

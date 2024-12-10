@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	pcm_models "github.com/enable-intelligent-containerized-5g/openapi/PacketCaptureModule/models"
+	pcm_models "github.com/enable-intelligent-containerized-5g/openapi/PacketCaptureModule/pcm_models"
 )
 
 // Divide a value in a PrometheusResult other float64

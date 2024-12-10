@@ -1,4 +1,4 @@
-package models
+package pcm_models
 
 import "time"
 

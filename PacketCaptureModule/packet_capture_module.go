@@ -9,7 +9,7 @@ import (
 
 	"context"
 
-	pcm_models "github.com/enable-intelligent-containerized-5g/openapi/PacketCaptureModule/models"
+	pcm_models "github.com/enable-intelligent-containerized-5g/openapi/PacketCaptureModule/pcm_models"
 	// "github.com/free5gc/nwdaf/internal/logger"
 	// "github.com/free5gc/nwdaf/pkg/factory"
 
